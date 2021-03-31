@@ -34,10 +34,42 @@ function App() {
 			</section>
 		);
 	} else {
+		const { id, order, title, dates, duties, company } = jobs[jobIndex];
 		return (
-			<div className="container">
-				<h2>Jobs </h2>
-			</div>
+			<section className="section">
+				<div className="title">
+					<h2>Experience</h2>
+					<div className="underline" />
+				</div>
+				<div className="jobs-center">
+					<div className="btn-container">
+						{jobs.map((job, index) => {
+							return (
+								<button
+									key={job.id}
+									className={`job-btn ${index == jobIndex && 'active-btn'}`}
+									onClick={() => setJobIndex(index)}
+								>
+									{job.company}
+								</button>
+							);
+						})}
+					</div>
+					<article className="job-info">
+						<h3>{title}</h3>
+						<h4>{company}</h4>
+						<p className="job-date">{dates}</p>
+						{duties.map((duty, index) => {
+							return (
+								<div key={index} className="job-desc">
+									<FaAngleDoubleRight className="job-icon" />
+									<p>{duty}</p>
+								</div>
+							);
+						})}
+					</article>
+				</div>
+			</section>
 		);
 	}
 }

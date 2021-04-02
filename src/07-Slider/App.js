@@ -6,7 +6,8 @@ import data from './data';
 function App() {
 	const [ people, setPeople ] = useState(data);
 	const [ index, setIndex ] = useState(0);
-	//autoplay
+
+	//when click on previous button for first time or when items runs out
 	useEffect(
 		() => {
 			const lastIndexOfPeopleArray = people.length - 1;
@@ -22,6 +23,20 @@ function App() {
 			}
 		},
 		[ index, people ]
+	);
+
+	//autoplay
+	useEffect(
+		() => {
+			let slider = setInterval(() => {
+				setIndex(index + 1);
+			}, 3000);
+
+			return () => {
+				clearInterval(slider);
+			};
+		},
+		[ index ]
 	);
 	return (
 		<section className="section">
